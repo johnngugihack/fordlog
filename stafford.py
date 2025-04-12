@@ -79,7 +79,7 @@ def registerDakota():
     except Exception as e:
         print("Database error:", str(e))
         return jsonify({'success': False, 'message': 'Server error'}), 500
-@app.route('/api/payment', methods=['POST'])
+@app.route('/aq', methods=['POST'])
 def process_payment():
     data = request.get_json()
 
