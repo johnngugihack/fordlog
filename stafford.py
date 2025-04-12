@@ -24,9 +24,7 @@ db_config = {
     'password': password,
     'database': database
 }
-@app.route('/')
-def home():
-    return "Welcome to Stafford!"
+
 @app.route('/api/register', methods=['POST'])  # Changed to 'register' to match purpose
 def register():
     data = request.json
