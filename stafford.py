@@ -25,7 +25,7 @@ db_config = {
     'database': database
 }
 
-@app.route('/api/register', methods=['POST'])  # Changed to 'register' to match purpose
+@app.route('/ar', methods=['POST'])  # Changed to 'register' to match purpose
 def register():
     data = request.json
     username = data.get('username')
