@@ -103,6 +103,30 @@ def process_payment():
         print("Database error:", e)
         return jsonify({"message": "Error storing payment"}), 500
 
+@app.route('/gr', methods=['POST'])
+def registergrayson():
+    data = request.json
+    username = data.get('username')
+    password = data.get('password')
+
+    if not username or not password:
+        return jsonify({'success': False, 'message': 'Username and password are required'}), 400
+
+    try:
+        connection = pymysql.connect(**db_config)
+        cursor = connection.cursor()
+
+        query = "INSERT INTO grayson (username, password) VALUES (%s, %s)"
+        cursor.execute(query, (username, password))
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+        return jsonify({'success': True, 'message': 'User registered successfully'}), 201
+
+    except Exception as e:
+        print("Database error:", str(e))
+        return jsonify({'success': False, 'message': 'Server error'}), 500
 
 
 
