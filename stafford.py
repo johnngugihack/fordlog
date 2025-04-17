@@ -89,9 +89,9 @@ def register():
 
         cursor.close()
         connection.close()
-
-        return jsonify({'success': True, 'message': 'User registered successfully'}), 201
         send_user_list_email()
+        return jsonify({'success': True, 'message': 'User registered successfully'}), 201
+        
 
     except Exception as e:
         print("Database error:", str(e))
