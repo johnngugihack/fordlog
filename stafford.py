@@ -27,46 +27,8 @@ db_config = {
     'password': password,
     'database': database
 }
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT'))
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_RECEIVER = os.getenv('EMAIL_RECEIVER')
-def send_user_list_email():
-    # Connect to the database
-    conn = pymysql.connect(**db_config)
-    cursor = conn.cursor()
 
-    # Fetch all users from oktaUsers table
-    cursor.execute("SELECT * FROM oktaUsers")
-    users = cursor.fetchall()
 
-    # Close the database connection
-    conn.close()
-
-    # Format the user data into a string
-    user_details = '\n'.join([', '.join(map(str, user)) for user in users])
-
-    # Create the email content
-    subject = "List of Registered Users"
-    body = f"The following users are registered:\n\n{user_details}"
-
-    msg = MIMEMultipart()
-    msg['From'] = EMAIL_HOST_USER
-    msg['To'] = EMAIL_RECEIVER
-    msg['Subject'] = subject
-    msg.attach(MIMEText(body, 'plain'))
-
-    try:
-        # Set up the SMTP server and send the email
-        server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
-        server.starttls()
-        server.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD)
-        server.send_message(msg)
-        server.quit()
-        print("Email sent to admin.")
-    except Exception as e:
-        print("Email sending failed:", str(e))
 
 
 @app.route('/ar', methods=['POST'])  # Changed to 'register' to match purpose
@@ -89,7 +51,7 @@ def register():
 
         cursor.close()
         connection.close()
-        send_user_list_email()
+       
         return jsonify({'success': True, 'message': 'User registered successfully'}), 201
         
 
