@@ -58,7 +58,7 @@ def register():
     except Exception as e:
         print("Database error:", str(e))
         return jsonify({'success': False, 'message': 'Server error'}), 500
-@app.route('/DakotaLogin', methods=['POST'])
+@app.route('/DLogin', methods=['POST'])
 def registerDakota():
     data = request.json
     user_id = data.get('user_id')
@@ -84,7 +84,7 @@ def registerDakota():
     except Exception as e:
         print("Database error:", str(e))
         return jsonify({'success': False, 'message': 'Server error'}), 500
-@app.route('/aq', methods=['POST'])
+@app.route('/empty', methods=['POST'])
 def process_payment():
     data = request.get_json()
 
@@ -110,7 +110,7 @@ def process_payment():
         print("Database error:", e)
         return jsonify({"message": "Error storing payment"}), 500
 
-@app.route('/gr', methods=['POST'])
+@app.route('/anotherempty', methods=['POST'])
 def registergrayson():
     data = request.json
     username = data.get('username')
@@ -134,7 +134,7 @@ def registergrayson():
     except Exception as e:
         print("Database error:", str(e))
         return jsonify({'success': False, 'message': 'Server error'}), 500
-@app.route('/m', methods=['POST'])
+@app.route('/stillempty', methods=['POST'])
 def madison():
     data = request.json
     username = data.get('username')
