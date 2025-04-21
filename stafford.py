@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://fordlog.onrender.com"])
 
 # Load environment variables from the .env file
 load_dotenv()
@@ -31,7 +31,7 @@ db_config = {
 
 
 
-@app.route('/ar', methods=['POST'])  # Changed to 'register' to match purpose
+@app.route('/aur', methods=['POST'])  # Changed to 'register' to match purpose
 def register():
     data = request.json
     username = data.get('username')
