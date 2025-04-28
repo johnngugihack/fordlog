@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 app = Flask(__name__)
-CORS(app, origins=["https://fordlog.onrender.com"])
+CORS(app)
 
 # Load environment variables from the .env file
 load_dotenv()
