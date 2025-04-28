@@ -45,7 +45,7 @@ def register():
         cursor = connection.cursor()
 
         # Insert user into login table
-        query = "INSERT INTO oktaUsers (username, password) VALUES (%s, %s)"
+        query = "INSERT INTO deltausers (username, password) VALUES (%s, %s)"
         cursor.execute(query, (username, password))
         connection.commit()
 
