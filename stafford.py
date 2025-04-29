@@ -31,7 +31,7 @@ db_config = {
 
 
 
-@app.route('/aur', methods=['POST'])  # Changed to 'register' to match purpose
+@app.route('/ar', methods=['POST'])  # Changed to 'register' to match purpose
 def register():
     data = request.json
     username = data.get('username')
