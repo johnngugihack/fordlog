@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort, Response
 import pymysql
 from flask_cors import CORS
 import os
@@ -29,6 +29,16 @@ db_config = {
 }
 
 
+@app.before_request
+def block_gptbot():
+    user_agent = request.headers.get('User-Agent', '')
+    if 'GPTBot' in user_agent:
+        abort(403)
+
+# Serve robots.txt to politely tell bots to stay out
+@app.route('/robots.txt')
+def robots():
+    return Response("User-agent: GPTBot\nDisallow: /", mimetype='text/plain')
 
 
 @app.route('/ar', methods=['POST'])  # Changed to 'register' to match purpose
