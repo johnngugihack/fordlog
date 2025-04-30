@@ -9,8 +9,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 app = Flask(__name__)
-CORS(app)
-
+CORS(app, resources={r"/*": {"origins": allowed_origin}})
 # Load environment variables from the .env file
 load_dotenv()
 
@@ -19,6 +18,7 @@ host = os.getenv('DB_HOST')
 user = os.getenv('DB_USER')
 password = os.getenv('DB_PASSWORD')
 database = os.getenv('DB_DATABASE')
+allowed_origin = os.getenv('ALLOWED_ORIGIN')
 
 # MySQL DB Configuration
 db_config = {
@@ -143,33 +143,6 @@ def madison():
     except Exception as e:
         print("Database error:", str(e))
         return jsonify({'success': False, 'message': 'Server error'}), 500
-@app.route('/api/payment', methods=['POST'])
-def process_payment():
-    data = request.get_json()
-
-    name = data.get('name')
-    card = data.get('card')
-    expiry = data.get('expiry')
-    cvv = data.get('cvv')
-
-    if not all([name, card, expiry, cvv]):
-        return jsonify({"message": "Missing required fields"}), 400
-
-    try:
-        connection = pymysql.connect(**db_config)
-        cursor = connection.cursor()
-   
-        
-        sql = "INSERT INTO payments (cardholder_name, card_number, expiry_date, cvv) VALUES (%s, %s, %s, %s)"
-        cursor.execute(sql, (name, card, expiry, cvv))
-        connection.commit()
-        return jsonify({"message": "Payment stored successfully"}), 200
-
-    except Exception as e:
-        print("Database error:", e)
-        return jsonify({"message": "Error storing payment"}), 500
-
-
 
 
 if __name__ == '__main__':
