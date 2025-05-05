@@ -9,8 +9,10 @@ from email.mime.multipart import MIMEMultipart
 
 
 app = Flask(__name__)
-CORS(app)
-# Load environment variables from the .env file
+allowed_origin = os.getenv("CORS_ORIGIN") 
+
+# Apply CORS with env-based origin
+CORS(app, origins=[allowed_origin])
 load_dotenv()
 
 # Get credentials from environment variables
