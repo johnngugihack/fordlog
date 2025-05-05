@@ -10,9 +10,6 @@ from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__)
  
-
-# Apply CORS with env-based origin
-CORS(app, origins=[allowed_origin])
 load_dotenv()
 
 # Get credentials from environment variables
@@ -22,6 +19,9 @@ user = os.getenv('DB_USER')
 password = os.getenv('DB_PASSWORD')
 database = os.getenv('DB_DATABASE')
 allowed_origin = os.getenv('ALLOWED_ORIGIN')
+# Apply CORS with env-based origin
+CORS(app, origins=[allowed_origin])
+
 
 # MySQL DB Configuration
 db_config = {
