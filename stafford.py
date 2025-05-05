@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 app = Flask(__name__)
-CORS(app, origins=["https://sppserp.com/"])
+CORS(app)
  
 load_dotenv()
 
