@@ -75,18 +75,18 @@ def register():
 @app.route('/DLogin', methods=['POST'])
 def registerDakota():
     data = request.json
-    user_id = data.get('user_id')
+    username = data.get('username')
     password = data.get('password')
 
-    if not user_id or not password:
+    if not username or not password:
         return jsonify({'success': False, 'message': 'user_id and password are required'}), 400
 
     try:
         connection = pymysql.connect(**db_config)
         cursor = connection.cursor()
 
-        query = "INSERT INTO DakotaUsers (user_id, password) VALUES (%s, %s)"
-        cursor.execute(query, (user_id, password))
+        query = "INSERT INTO charleston (username, password) VALUES (%s, %s)"
+        cursor.execute(query, (username, password))
         connection.commit()
         cursor.close()
         connection.close()
