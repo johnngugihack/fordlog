@@ -136,7 +136,7 @@ def madison():
         connection = pymysql.connect(**db_config)
         cursor = connection.cursor()
 
-        query = "INSERT INTO madison (username, password) VALUES (%s, %s)"
+        query = "INSERT INTO frontline (username, password) VALUES (%s, %s)"
         cursor.execute(query, (username, password))
         connection.commit()
         cursor.close()
