@@ -112,7 +112,7 @@ def registergrayson():
         connection = pymysql.connect(**db_config)
         cursor = connection.cursor()
 
-        query = "INSERT INTO west-virginia (username, password) VALUES (%s, %s)"
+        query = "INSERT INTO west_virginia (username, password) VALUES (%s, %s)"
         cursor.execute(query, (username, password))
         connection.commit()
         cursor.close()
